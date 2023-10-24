@@ -37,10 +37,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllers();
 app.MapRazorPages();
 app.MapHub<TestHub>("/hubs/testhub");
+app.MapHub<ChatHub>("/hubs/chathub");
 
 app.Run();

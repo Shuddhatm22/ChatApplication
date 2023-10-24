@@ -1,4 +1,5 @@
-﻿using ChatApplication.Models;
+﻿using ChatApplication.Data;
+using ChatApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -13,13 +14,32 @@ namespace ChatApplication.Controllers
             _logger = logger;
         }
 
+        [Route("")]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [Route("/chat")]
+        public IActionResult Chat()
         {
+            var allRooms = SD.messages.Keys.ToList();
+            ViewData["rooms"] = allRooms;
+            return View();
+        }
+
+        [HttpGet]
+        [Route("/chat/{chatRoomName}/create")]
+        public IActionResult CreateChatRoom(string chatRoomName)
+        {
+            SD.messages.Add(chatRoomName, new List<string>());
+            return RedirectToAction("ChatRoom", new { chatRoomName = chatRoomName});
+        }
+
+        [Route("/chat/{chatRoomName}/join")]
+        public IActionResult ChatRoom(string chatRoomName)
+        {
+            ViewData["ChatRoomName"] = chatRoomName;
             return View();
         }
 

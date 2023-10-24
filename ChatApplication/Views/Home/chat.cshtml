@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Box</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        select {
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        #roomNameContainer {
+            margin-bottom: 15px;
+        }
+
+        #existingRooms button {
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            #existingRooms button:hover {
+                background-color: #45a049;
+            }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="post" id="chatRoomForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" />
+
+            <label for="roomOption">Select an option:</label>
+            <select id="roomOption" name="roomOption">
+                <option value="join">Join Existing Room</option>
+                <option value="create">Create New Room</option>
+            </select>
+
+            <div id="roomNameContainer" style="display: none;">
+                <label for="roomname">Room Name:</label>
+                <input type="text" id="roomname" name="roomname" />
+            </div>
+
+            <div id="existingRooms" style="display: none;">
+                @foreach(var room in ViewData["rooms"] as List<string>)
+                {
+                    <select id="roomSelect">
+                        <option value="@room">@room</option>
+                    </select>
+                }
+                <!-- Existing rooms buttons will be appended here -->
+            </div>
+
+            <input type="submit" id="submit-btn" value="Submit" />
+        </form>
+    </div>
+</body>
+<script src="~/js/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+</html>
+
+
+
+
+

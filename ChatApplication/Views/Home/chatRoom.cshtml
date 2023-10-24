@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        @ViewData["ChatRoomName"]</title>
+    <style>
+        #chat-box {
+            height: 300px;
+            width: 400px;
+            overflow: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-box"></div>
+
+    <form method="post" id="messageForm">
+        <input type="text" id="message-input" />
+        <input type="submit" value="Submit" />
+    </form>
+
+</body>
+<script src="~/js/signalr.js"></script>
+<script src="~/js/chatroom.js"></script>
+</html>
